@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+description = 'FastCGI Server'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files('./libs/fastcgi-lib.jar')
+    implementation files('./libs/gson-2.10.1.jar')
+    implementation files('./libs/json-simple-1.1.1.jar')
+
+}
+
+application {
+    mainClass = 'Server'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Server'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    archiveFileName = 'Server.jar'
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtimeClasspath
+    into 'build/dependencies'
+}
