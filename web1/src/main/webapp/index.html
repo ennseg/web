@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>777</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<video class="video-background" autoplay muted loop>
+    <source src="sources/video_background.mp4" type="video/mp4">
+</video>
+<div class="main">
+    <header class="banner">
+        <h1>Соболев Егор Викторович P3209 467530</h1>
+    </header>
+    <div class="banner table">
+        <table>
+            <thead>
+            <tr>
+                <th>R</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>success</th>
+                <th>current time</th>
+                <th>work time</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+    <div class="banner coord_sys">
+        <canvas id="coordCanvas" width="400" height="400"></canvas>
+    </div>
+
+    <form id="dataForm" class="banner data_input" method="post">
+        <label class="custom-checkbox">изменение X:
+            <input type="checkbox" name="X" value="-2">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">-2</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="-1.5">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">-1.5</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="-1">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">-1</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="-0.5">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">-0.5</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="0">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">0</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="0.5">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">0.5</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="1">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">1</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="1.5">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">1.5</span>
+        </label>
+        <label class="custom-checkbox">
+            <input type="checkbox" name="X" value="2">
+            <span class="checkmark"></span>
+            <span class="checkbox-text">2</span>
+        </label>
+
+        <div style="margin-top: 10px;">
+            <label for="Y">изменение Y:</label>
+            <input type="text" id="Y" name="Y" placeholder="Введите значение -3 < Y < 3">
+        </div>
+
+        <div style="margin-top: 10px;">
+            <label for="R">изменение R:</label>
+            <select name="R" id="R">
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <button type="submit" class="roll_button">START</button>
+        </div>
+    </form>
+    <button class="microphone">
+        <canvas id="mic" width="30" height="30"></canvas>
+    </button>
+    <button class="clear">Clear table</button>
+
+    <div id="response" class="response-banner"></div>
+    <div id="successBanner" class="success-banner center-container">JACKPOT!!!</div>
+    <img class="lineButton" id="lineButton1" src="sources/line1/up.png">
+    <audio id="audio1" src="sources/audio/audio1.m4a"></audio>
+    <img class="lineButton" id="lineButton3" src="sources/line3/up.png">
+    <audio id="audio2" src="sources/audio/audio2.m4a"></audio>
+    <img class="lineButton" id="lineButton5" src="sources/line5/up.png">
+    <audio id="audio3" src="sources/audio/audio3.m4a"></audio>
+    <img class="lineButton" id="lineButton7" src="sources/line7/up.png">
+    <audio id="audio4" src="sources/audio/audio4.m4a"></audio>
+    <img class="lineButton" id="lineButton9" src="sources/line9/up.png">
+    <audio id="audio5" src="sources/audio/audio5.m4a"></audio>
+
+    <button class="share">Share in Telegram</button>
+
+    <button class="dodep">ДОДЕП</button>
+
+    <div id="dodepModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Реквизиты для депозита</h2>
+            <p>Телефон: <strong>+7 913 868 1052</strong></p>
+            <p>Номер карты: <strong>2200 1529 7788 9735</strong></p>
+        </div>
+    </div>
+
+    <script src="scripts/dodep.js"></script>
+
+</div>
+
+<script src="scripts/line1.js"></script>
+<script src="scripts/line3.js"></script>
+<script src="scripts/line5.js"></script>
+<script src="scripts/line7.js"></script>
+<script src="scripts/line9.js"></script>
+<script src="scripts/coord_sys.js"></script>
+<script src="scripts/init.js"></script>
+<script src="scripts/microphone.js"></script>
+<script src="scripts/share.js"></script>
+</body>
+</html>
