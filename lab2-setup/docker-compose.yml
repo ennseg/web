@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+  wildfly:
+    image: wildfly-app:latest
+    build: .
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+      - "9999:9999"
+      - "9090:9090"
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  loki:
+    image: grafana/loki:2.8.2
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-data:/loki
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+    depends_on:
+      - loki
+      - prometheus
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+
+  
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - ./promtail-config.yaml:/etc/promtail/config.yml
+      - /path/to/wildfly/logs:/wildfly/logs
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki

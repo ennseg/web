@@ -1,0 +1,3 @@
+/subsystem=microprofile-metrics-smallrye:write-attribute(name=exposed-subsystems,value=["*"])
+/subsystem=microprofile-metrics-smallrye:write-attribute(name=security-enabled,value=false)
+reload
