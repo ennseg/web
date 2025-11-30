@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile files('./libs/jakarta.servlet-api-6.1.0.jar')
+    providedCompile files('./libs/jakarta.enterprise.cdi-api-4.1.0.jar')
+    providedCompile files('./libs/jakarta.inject-api-2.0.1.jar')
+    providedCompile files('./libs/cdi-api-2.0.SP1.jar')
+    providedCompile files('./libs/microprofile-metrics-api-5.1.2.jar')
+    providedCompile files('./libs/jakarta.jakartaee-api-11.0.0.jar')
+}
+
+war {
+    archiveFileName = 'lab2.war'
+
+    from('src/main/webapp') {
+        include '**/*'
+        exclude 'WEB-INF/web.xml'
+    }
+
+    manifest {
+        attributes(
+                'Dependencies': 'org.eclipse.microprofile.metrics.api'
+        )
+    }
+
+    webXml = file('src/main/webapp/WEB-INF/web.xml')
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
