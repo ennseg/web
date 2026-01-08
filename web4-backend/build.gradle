@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    compileOnly "jakarta.platform:jakarta.jakartaee-web-api:11.0.0"
+    implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:3.0.3'
+    implementation 'org.postgresql:postgresql:42.7.7'
+    implementation 'com.h2database:h2:2.2.224'
+    implementation "io.jsonwebtoken:jjwt-api:0.13.0"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:0.13.0"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:0.13.0"
+    runtimeOnly "io.jsonwebtoken:jjwt-gson:0.13.0"
+    implementation("com.dylibso.chicory:runtime:1.1.0")
+    implementation("com.dylibso.chicory:wasi:1.1.0")
+}
+
+
+//tasks.register('frontendBuild', Exec) {
+//    workingDir = file("$projectDir/frontend")
+//    commandLine '"C:/Program Files/nodejs/npm.cmd"', 'run', 'build'
+//}
+
+//processResources.dependsOn(frontendBuild)
+
+war {
+    archiveFileName = 'lab4.war'
+
+    //from('src/main/webapp') {
+    //    include '**/*'
+    //    exclude 'WEB-INF/web.xml'
+    //}
+
+    //webXml = file('src/main/webapp/WEB-INF/web.xml')
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+test {
+    useJUnitPlatform()
+}
